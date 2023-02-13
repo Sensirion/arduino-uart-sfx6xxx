@@ -1,0 +1,58 @@
+#######################################
+# Syntax Coloring Map
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SensirionUartSfc6xxx	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+closeValve	KEYWORD2
+setSetpoint	KEYWORD2
+getSetpoint	KEYWORD2
+readMeasuredValue	KEYWORD2
+readAveragedMeasuredValue	KEYWORD2
+setSetpointAndReadMeasuredValue	KEYWORD2
+setUserControllerGain	KEYWORD2
+getUserControllerGain	KEYWORD2
+setUserInitStep	KEYWORD2
+getUserInitStep	KEYWORD2
+measureRawFlow	KEYWORD2
+measureRawThermalConductivityWithClosedValve	KEYWORD2
+measureTemperature	KEYWORD2
+getNumberOfCalibrations	KEYWORD2
+getCalibrationValidity	KEYWORD2
+getCalibrationGasId	KEYWORD2
+getCalibrationGasUnit	KEYWORD2
+getCalibrationFullscale	KEYWORD2
+getCurrentGasId	KEYWORD2
+getCurrentGasUnit	KEYWORD2
+getCurrentFullscale	KEYWORD2
+setCalibration	KEYWORD2
+getCalibration	KEYWORD2
+setCalibrationVolatile	KEYWORD2
+setSlaveAddress	KEYWORD2
+getSlaveAddress	KEYWORD2
+setBaudrate	KEYWORD2
+getBaudrate	KEYWORD2
+getProductType	KEYWORD2
+getProductName	KEYWORD2
+getArticleCode	KEYWORD2
+getSerialNumber	KEYWORD2
+getVersion	KEYWORD2
+deviceReset	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+sensor	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################

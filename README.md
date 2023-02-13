@@ -1,92 +1,267 @@
-# arduino-uart-sfc6xxx
+# Sensirion UART SFC6XXX Arduino Library
+
+This is the Sensirion SFC6XXX library for Arduino allowing you to 
+communicate with a sensor of the SFC6XXX family over UART using the SHDLC protocol.
+
+<center><img src="images/product-image-sfc6xxx.png" width="300px"></center>
+
+Click [here](https://sensirion.com/sfc6000) to learn more about the Sensirion SFC6XXX sensor family.
 
 
 
-## Getting started
+## Supported sensor types
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+- [SFC6XXX](https://sensirion.com/products/catalog/SFC6000/)
+- [SFC6000D-5SLM](https://sensirion.com/products/catalog/SFC6000D-5slm/)
+- [SFC6000D-50SLM](https://sensirion.com/products/catalog/SFC6000D-50slm/)
+- [SFC6000D-20SLM](https://sensirion.com/products/catalog/SFC6000D-20slm/)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+The following instructions and examples use a *SFC6xxx*.
 
-## Add your files
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+
+
+## Installation of the library
+
+This library can be installed using the Arduino Library manager:
+Start the [Arduino IDE](http://www.arduino.cc/en/main/software) and open
+the Library Manager via
+
+`Sketch` ➔ `Include Library` ➔ `Manage Libraries...`
+
+Search for the `Sensririon UART SFC6XXX` library in the `Filter your search...` 
+field and install it by clicking the `install` button.
+
+If you cannot find it in the library manager, download the latest release as .zip file 
+and add it to your [Arduino IDE](http://www.arduino.cc/en/main/software) via
+
+`Sketch` ➔ `Include Library` ➔ `Add .ZIP Library...`
+
+Don't forget to **install the dependencies** listed below the same way via library 
+manager or `Add .ZIP Library`
+
+
+## Dependencies
+* [Sensirion Core](https://github.com/Sensirion/arduino-core)
+
+
+## Sensor wiring
+
+### Connecting the Sensor
+
+Use the following pin description to connect your SFC6XXX to your Arduino board:
+
+<img src="images/product-pinout-sfc6xxx.png" width="300px">
+
+| *Pin* | *Cable Color* | *Name* | *Description*  | *Comments* |
+|-------|---------------|:------:|----------------|------------|
+| 1 | brown | VDD | Supply Voltage | +24V
+| 2 | white | D+ |  | 
+| 3 | black | D- |  | 
+| 4 | blue | GND | Ground | 
+
+
+
+### Board-specific wiring
+
+We recommend using Arduino Boards or an ESP supporting **two or more hardware serial connections** 
+to run the example code. One serial port is needed to connect the SFC6XXX sensor and the other one 
+(over USB) for logging to the Serial Monitor of the Arduino IDE.
+
+Arduino Uno, Micro and Nano have only one hardware serial connection and are therefore not recommended to use. 
+There is the option to use the SoftwareSerial library to emulate a serial connection, but it does not work 
+reliably to communicate with the sensor at the required baudrate of 115200 baud. However, you can connect your sensor 
+over the hardware serial connection and use the SoftwareSerial library to set up a connection for logging to the host.
+
+You will find pinout schematics for recommended board models below:
+
+<details><summary>Arduino Mega 2560 Rev3 Pinout</summary>
+<p>
+
+| *SFC6XXX* | *SFC6XXX Pin* | *Cable Color* | *Board Pin* |
+| :---: | --- | --- | --- |
+| VDD | 1 | brown | 5V |
+| D+ | 2 | white |  |
+| D- | 3 | black |  |
+| GND | 4 | blue | GND |
+
+
+
+
+> **Note:** Make sure to connect serial pins as cross-over (RX pin of sensor -> TX pin on Arduino; TX pin of sensor -> RX pin on Ardunio)
+
+<img src="images/Arduino-uart-Mega-2560-Rev3-pinout-5V.png" width="600px">
+</p>
+</details>
+
+<details><summary>Espressif ESP32-DevKitC Pinout</summary>
+<p>
+
+| *SFC6XXX* | *SFC6XXX Pin* | *Cable Color* | *Board Pin* |
+| :---: | --- | --- | --- |
+| VDD | 1 | brown | 5V |
+| D+ | 2 | white |  |
+| D- | 3 | black |  |
+| GND | 4 | blue | GND |
+
+
+
+
+> **Note:** Make sure to connect serial pins as cross-over (RX pin of sensor -> TX pin on ESP; TX pin of sensor -> RX pin on ESP)
+
+<img src="images/esp32-serial2-devkitc-pinout-5V.png" width="600px">
+</p>
+</details>
+
+## Quick start example
+
+1. Install the libraries and dependencies according to [Installation of the library](#installation-of-the-library)
+
+2. Connect the SFC6XXX sensor as explained in [Sensor wiring](#sensor-wiring)
+
+3. Load the `exampleUsage` sample project within the Arduino IDE:
+
+   `File` ➔ `Examples` ➔ `Sensirion UART SFC6XXX` ➔ `exampleUsage`
+
+4. Depending on your Arduino board you may need to adapt the code sample. 
+See the [board specific instruction](#board-specific-instructions) section for more information. 
+
+5. Make sure to select the correct board model under `Tools` ➔ `Boards` and the 
+   connected USB port under `Tools` ➔ `Port`.
+
+6. Click the `Upload` button in the Arduino IDE or `Sketch` ➔ `Upload`
+
+7. When the upload process has finished, open the `Serial Monitor` or `Serial
+   Plotter` via the `Tools` menu to observe the measurement values. Note that
+   the `Baud Rate` in the used tool has to be set to `115200 baud`.
+
+### Board-specific instructions
+<details><summary>Arduino Mega 2560</summary>
+<p>
+
+#### Serial Interface
+The provided wiring instructed you to connect the SFC6XXX to **Serial Port 1**. 
+Therefore, the following line needs to be used in the usage example code:
+
+`#define SENSOR_SERIAL_INTERFACE Serial1`
+</p>
+</details>
+
+
+<details><summary>Espressif ESP32-DevKitC</summary>
+<p>
+
+#### ESP32 Library
+The ESP32 board is not supported by default with Arduino IDE. If it is your first time using an ESP32 board, 
+you should follow this [guide](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html) from 
+Esspressif itself.
+
+#### Serial Interface
+The provided wiring instructed you to connect the sensor to **Serial Port 2**.
+
+Since ESP boards require `HardwareSerial` implementation, you need to include the following lines in the usage example code:
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.sensirion.lokal/MSO-SW/drivers/arduino/arduino-uart-sfc6xxx.git
-git branch -M master
-git push -uf origin master
+#include <HardwareSerial.h>
+HardwareSerial HwSerial(2);
+#define SENSOR_SERIAL_INTERFACE HwSerial
 ```
+</p>
+</details>
 
-## Integrate with your tools
+<details><summary>Emulated serial connection for logging (Arduino Uno, Arduino Nano, Arduino Micro)</summary>
+<p>
+Use following instructions if your board has only one hardware serial port and you want to emulated a serial 
+connection for logging to the host using the SoftwareSerial library.
 
-- [ ] [Set up project integrations](https://gitlab.sensirion.lokal/MSO-SW/drivers/arduino/arduino-uart-sfc6xxx/-/settings/integrations)
+* To connect your Arduino to your host for the logging connection, you can for example use the [USB to TTL Serial Cable from Adafruit](http://adafru.it/954).
 
-## Collaborate with your team
+  In the example we use Pin 8 and 9 on the Arduino Board for RX/TX.
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+    | Cable wire         | Wire color | Arduino Pin     |
+    | -------------------|------------|-----------------|
+    | TX line out of USB | green      | Pin8            |
+    | RX line into USB   | white      | Pin9            |
+    | ground             | black      | do not connect  |
+    | RX line into USB   | red        | do not connect  |
+  
 
-## Test and Deploy
 
-Use the built-in continuous integration in GitLab.
+    > Note: depending on your Arduino Board not all Pins can be used for RX, see [SoftwareSerial documentation](https://docs.arduino.cc/learn/built-in-libraries/software-serial#limitations-of-this-library) for more details.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+* Adapt example usage code:
 
-***
+   * Add following header lines and set rxPin and txPin numbers to the pin numbers you connected your serial cable to.
 
-# Editing this README
+      ```
+      // Software serial setup
+      #include <SoftwareSerial.h>
+      #define rxPin 8
+      #define txPin 9
+      SoftwareSerial sw_serial =  SoftwareSerial(rxPin, txPin);
+      ```
+   * Set the define for the serial connection to use to communicate with the sensor to
+  
+     For Arduino Uno and Nano:
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+     `#define SENSOR_SERIAL_INTERFACE Serial`
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+     For Arduino Micro:
 
-## Name
-Choose a self-explaining name for your project.
+     `#define SENSOR_SERIAL_INTERFACE Serial1`
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+   * In the setup() add following lines of code:
+      ```
+      // Define pin modes for TX and RX
+      pinMode(rxPin, INPUT);
+      pinMode(txPin, OUTPUT);
+      sw_serial.begin(9600);
+      ```
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+      Remove the initialization lines for `Serial` used by default for logging.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+   * Replace all occurences of `Serial.print` with `sw_serial.print`
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+* Load the example to your Arduino. Make sure to unplug supply voltage (5V pin) of the sensor while doing so, otherwise the Arduino IDE cannot communicate over the serial interface (as the USB Port and the TX/RX Pin use the same HW Serial interface).
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+* Instead of using the `Serial Monitor` or `Serial Plotter` of the Arduino IDE, open a serial monitor on your host system and set the `Baudrate` to `9600 baud`. On Linux you can for example use the `grabserial` tool:
+
+   `grabserial -d /dev/ttyUSB0 -b 9600 --crtonewline`
+
+* Press the Reset Button on your Arduino to restart the example execution once you have the sensor supply voltage plugged back in.
+
+</p>
+</details>
+
+
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+**Contributions are welcome!**
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+We develop and test this driver using our company internal tools (version
+control, continuous integration, code review etc.) and automatically
+synchronize the master branch with GitHub. But this doesn't mean that we don't
+respond to issues or don't accept pull requests on GitHub. In fact, you're very
+welcome to open issues or create pull requests :)
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+This Sensirion library uses
+[`clang-format`](https://releases.llvm.org/download.html) to standardize the
+formatting of all our `.cpp` and `.h` files. Make sure your contributions are
+formatted accordingly:
+
+The `-i` flag will apply the format changes to the files listed.
+
+```bash
+clang-format -i src/*.cpp src/*.h
+```
+
+Note that differences from this formatting will result in a failed build until
+they are fixed.
+
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+See [LICENSE](LICENSE).
