@@ -64,9 +64,6 @@ int16_t SensirionUartSfc6xxx::setSetpoint(float setpoint) {
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
         *_serial, txFrame, rxFrame, 50 * 1000);
-    if (localError) {
-        return localError;
-    }
     return localError;
 }
 
@@ -170,9 +167,6 @@ int16_t SensirionUartSfc6xxx::setUserControllerGain(float gain) {
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
         *_serial, txFrame, rxFrame, 50 * 1000);
-    if (localError) {
-        return localError;
-    }
     return localError;
 }
 
@@ -210,9 +204,6 @@ int16_t SensirionUartSfc6xxx::setUserInitStep(float initStep) {
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
         *_serial, txFrame, rxFrame, 50 * 1000);
-    if (localError) {
-        return localError;
-    }
     return localError;
 }
 
@@ -486,9 +477,6 @@ int16_t SensirionUartSfc6xxx::setCalibration(uint32_t calibrationNumber) {
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
         *_serial, txFrame, rxFrame, 50 * 1000);
-    if (localError) {
-        return localError;
-    }
     return localError;
 }
 
@@ -525,9 +513,6 @@ SensirionUartSfc6xxx::setCalibrationVolatile(uint32_t calibrationNumber) {
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
         *_serial, txFrame, rxFrame, 50 * 1000);
-    if (localError) {
-        return localError;
-    }
     return localError;
 }
 
@@ -544,9 +529,6 @@ int16_t SensirionUartSfc6xxx::setSlaveAddress(uint8_t slaveAddress) {
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
         *_serial, txFrame, rxFrame, 50 * 1000);
-    if (localError) {
-        return localError;
-    }
     return localError;
 }
 
@@ -582,9 +564,6 @@ int16_t SensirionUartSfc6xxx::setBaudrate(uint32_t baudrate) {
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
         *_serial, txFrame, rxFrame, 50 * 1000);
-    if (localError) {
-        return localError;
-    }
     return localError;
 }
 
@@ -732,7 +711,7 @@ int16_t SensirionUartSfc6xxx::deviceReset() {
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
         *_serial, txFrame, rxFrame, 100 * 1000);
-    if (localError) {
+    if (localError != NO_ERROR) {
         return localError;
     }
     delay(300);
