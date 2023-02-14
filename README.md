@@ -61,6 +61,31 @@ Use the following pin description to connect your SFC6XXX to your Arduino board:
 | 4 | blue | GND | Ground | 
 
 
+<details>
+<summary>
+MS5Stack RS485 Converter
+</summary>
+<p>
+Wiring of sensor pins to Adapter:
+
+| *Sensor Pin* | *Cable Color* | *Name* | *Adapter connection*  | *Comments* |
+|--------------|---------------|:-------------:|------------|------------|
+| 1 | brown | VDD | +24V | Connect to external power supply.
+| 2 | white | D+ | B | 
+| 3 | black | D- | A | 
+| 4 | blue | GND | Ground | Connect the Ground of the external power supply to the adapter ground as well
+
+Wiring of Adapter to Arduino:
+
+| *Adapter* | *Cable Color* | *Arduino Pin* | *Comments* |
+|--------------|---------------|:-------------:|------------|
+| TXD | white | RX | cross over
+| RXD | yellow | TX | cross over | 
+| 5V | red | +5V | Power supply for the adapter.
+| GND | black | GND | Connect the Ground of the external power supply to the adapter ground as well
+
+</p>
+</details>
 
 ### Board-specific wiring
 
