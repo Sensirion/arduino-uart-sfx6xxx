@@ -16,38 +16,38 @@ compile_test:
         - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:avr:uno exampleUsage/exampleUsage.ino
         - arduino-cli compile --libraries=".." --warnings all --fqbn esp32:esp32:esp32 exampleUsage/exampleUsage.ino
         - arduino-cli compile --libraries=".." --warnings all --fqbn esp8266:esp8266:generic exampleUsage/exampleUsage.ino
-    arduino_lint:
-      stage: validate
-      image:
-        name: registry.gitlab.sensirion.lokal/mso-sw/drivers/docker-driver-generator:0.2.0
-      tags: [linux, docker]
-      script:
-        - mkdir ~/arlint
-        - PATH=~/arlint:$PATH
-        - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-lint/main/etc/install.sh | BINDIR=~/arlint sh
-         - arduino-lint --library-manager false
+arduino_lint:
+  stage: validate
+  image:
+    name: registry.gitlab.sensirion.lokal/mso-sw/drivers/docker-driver-generator:0.2.0
+  tags: [linux, docker]
+  script:
+    - mkdir ~/arlint
+    - PATH=~/arlint:$PATH
+    - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-lint/main/etc/install.sh | BINDIR=~/arlint sh
+      - arduino-lint --library-manager false
 
-    syntax_check:
-      stage: validate
-      image:
-          name: registry.gitlab.sensirion.lokal/mso-sw/drivers/docker-driver-generator:0.2.0
-      tags: [linux, docker]
-      script:
-        - find . -type f -iregex ".*\.\(c\|h\|cpp\|ino\)" -exec clang-format-6.0 -i -style=file {} \; && git diff --exit-code
+syntax_check:
+  stage: validate
+  image:
+      name: registry.gitlab.sensirion.lokal/mso-sw/drivers/docker-driver-generator:0.2.0
+  tags: [linux, docker]
+  script:
+    - find . -type f -iregex ".*\.\(c\|h\|cpp\|ino\)" -exec clang-format-6.0 -i -style=file {} \; && git diff --exit-code
 
 
-    cppcheck:
-      stage: validate
-      image:
-          name: registry.gitlab.sensirion.lokal/mso-sw/drivers/docker-driver-generator:0.2.0
-      tags: [linux, docker]
-      script:
-        - cppcheck --std=c++11 --language=c++ --error-exitcode=1 --enable=warning,style,performance,portability src/*
+cppcheck:
+  stage: validate
+  image:
+      name: registry.gitlab.sensirion.lokal/mso-sw/drivers/docker-driver-generator:0.2.0
+  tags: [linux, docker]
+  script:
+    - cppcheck --std=c++11 --language=c++ --error-exitcode=1 --enable=warning,style,performance,portability src/*
 
-    TODO_check:
-      stage: validate
-      image:
-          name: registry.gitlab.sensirion.lokal/mso-sw/drivers/docker-driver-generator:0.2.0
-      tags: [linux, docker]
-      script:
-        - '! grep -rnw --exclude=.gitlab-ci.yml --exclude-dir=.git . -e "TODO"'
+TODO_check:
+  stage: validate
+  image:
+      name: registry.gitlab.sensirion.lokal/mso-sw/drivers/docker-driver-generator:0.2.0
+  tags: [linux, docker]
+  script:
+    - '! grep -rnw --exclude=.gitlab-ci.yml --exclude-dir=.git . -e "TODO"'
