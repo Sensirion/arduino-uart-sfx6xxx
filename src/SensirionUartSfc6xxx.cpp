@@ -63,7 +63,7 @@ int16_t SensirionUartSfc6xxx::setSetpoint(float setpoint) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     return localError;
 }
 
@@ -79,7 +79,7 @@ int16_t SensirionUartSfc6xxx::getSetpoint(float& setpoint) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -99,7 +99,7 @@ int16_t SensirionUartSfc6xxx::readMeasuredValue(float& measuredValue) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -122,7 +122,7 @@ SensirionUartSfc6xxx::readAveragedMeasuredValue(uint8_t measurements,
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 200 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)200 * 1000);
     if (localError) {
         return localError;
     }
@@ -145,7 +145,7 @@ SensirionUartSfc6xxx::setSetpointAndReadMeasuredValue(float setpoint,
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -166,7 +166,7 @@ int16_t SensirionUartSfc6xxx::setUserControllerGain(float gain) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     return localError;
 }
 
@@ -182,7 +182,7 @@ int16_t SensirionUartSfc6xxx::getUserControllerGain(float& gain) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -203,7 +203,7 @@ int16_t SensirionUartSfc6xxx::setUserInitStep(float initStep) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     return localError;
 }
 
@@ -219,7 +219,7 @@ int16_t SensirionUartSfc6xxx::getUserInitStep(float& initStep) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -239,7 +239,7 @@ int16_t SensirionUartSfc6xxx::measureRawFlow(uint16_t& flow) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -260,7 +260,7 @@ int16_t SensirionUartSfc6xxx::measureRawThermalConductivityWithClosedValve(
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 600 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)600 * 1000);
     if (localError) {
         return localError;
     }
@@ -280,7 +280,7 @@ int16_t SensirionUartSfc6xxx::measureTemperature(float& temperature) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -301,7 +301,7 @@ SensirionUartSfc6xxx::getNumberOfCalibrations(uint32_t& numberOfCalibrations) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -323,7 +323,7 @@ int16_t SensirionUartSfc6xxx::getCalibrationValidity(uint32_t index,
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -345,7 +345,7 @@ int16_t SensirionUartSfc6xxx::getCalibrationGasId(uint32_t index,
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -369,7 +369,7 @@ int16_t SensirionUartSfc6xxx::getCalibrationGasUnit(uint32_t index,
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -393,7 +393,7 @@ int16_t SensirionUartSfc6xxx::getCalibrationFullscale(uint32_t index,
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -413,7 +413,7 @@ int16_t SensirionUartSfc6xxx::getCurrentGasId(uint32_t& gasId) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -434,7 +434,7 @@ int16_t SensirionUartSfc6xxx::getCurrentGasUnit(int8_t& prefix, uint8_t& unit,
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -456,7 +456,7 @@ int16_t SensirionUartSfc6xxx::getCurrentFullscale(float& fullscale) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -476,7 +476,7 @@ int16_t SensirionUartSfc6xxx::setCalibration(uint32_t calibrationNumber) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     return localError;
 }
 
@@ -491,7 +491,7 @@ int16_t SensirionUartSfc6xxx::getCalibration(uint32_t& calibrationNumber) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -512,7 +512,7 @@ SensirionUartSfc6xxx::setCalibrationVolatile(uint32_t calibrationNumber) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     return localError;
 }
 
@@ -528,7 +528,7 @@ int16_t SensirionUartSfc6xxx::setSlaveAddress(uint8_t slaveAddress) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     return localError;
 }
 
@@ -543,7 +543,7 @@ int16_t SensirionUartSfc6xxx::getSlaveAddress(uint8_t& slaveAddress) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -563,7 +563,7 @@ int16_t SensirionUartSfc6xxx::setBaudrate(uint32_t baudrate) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     return localError;
 }
 
@@ -578,7 +578,7 @@ int16_t SensirionUartSfc6xxx::getBaudrate(uint32_t& baudrate) {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -599,7 +599,7 @@ int16_t SensirionUartSfc6xxx::getProductType(int8_t productType[],
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -620,7 +620,7 @@ int16_t SensirionUartSfc6xxx::getProductName(int8_t productName[],
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -641,7 +641,7 @@ int16_t SensirionUartSfc6xxx::getArticleCode(int8_t articleCode[],
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -662,7 +662,7 @@ int16_t SensirionUartSfc6xxx::getSerialNumber(int8_t serialNumber[],
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -685,7 +685,7 @@ SensirionUartSfc6xxx::getVersion(uint8_t& firmwareMajor, uint8_t& firmwareMinor,
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 50 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)50 * 1000);
     if (localError) {
         return localError;
     }
@@ -710,7 +710,7 @@ int16_t SensirionUartSfc6xxx::deviceReset() {
         return localError;
     }
     localError = SensirionShdlcCommunication::sendAndReceiveFrame(
-        *_serial, txFrame, rxFrame, 100 * 1000);
+        *_serial, txFrame, rxFrame, (uint32_t)100 * 1000);
     if (localError != NO_ERROR) {
         return localError;
     }
