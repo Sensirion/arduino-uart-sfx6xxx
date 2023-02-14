@@ -10,12 +10,12 @@ compile_test:
         - rm -rf ../sensirion-core-arduino-library
     script:
         - git clone --depth 1 --branch 0.5.2 https://github.com/Sensirion/arduino-core.git ../sensirion-core-arduino-library
-        - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:samd:mkrzero exampleUsage/exampleUsage.ino
-        - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:avr:mega exampleUsage/exampleUsage.ino
-        - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:avr:nano exampleUsage/exampleUsage.ino
-        - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:avr:uno exampleUsage/exampleUsage.ino
-        - arduino-cli compile --libraries=".." --warnings all --fqbn esp32:esp32:esp32 exampleUsage/exampleUsage.ino
-        - arduino-cli compile --libraries=".." --warnings all --fqbn esp8266:esp8266:generic exampleUsage/exampleUsage.ino
+        - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:samd:mkrzero examples/exampleUsage/exampleUsage.ino
+        - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:avr:mega examples/exampleUsage/exampleUsage.ino
+        - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:avr:nano examples/exampleUsage/exampleUsage.ino
+        - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:avr:uno examples/exampleUsage/exampleUsage.ino
+        - arduino-cli compile --libraries=".." --warnings all --fqbn esp32:esp32:esp32 examples/exampleUsage/exampleUsage.ino
+        - arduino-cli compile --libraries=".." --warnings all --fqbn esp8266:esp8266:generic examples/exampleUsage/exampleUsage.ino
 
 arduino_lint:
   stage: validate
