@@ -16,6 +16,7 @@ compile_test:
         - arduino-cli compile --libraries=".." --warnings all --fqbn arduino:avr:uno exampleUsage/exampleUsage.ino
         - arduino-cli compile --libraries=".." --warnings all --fqbn esp32:esp32:esp32 exampleUsage/exampleUsage.ino
         - arduino-cli compile --libraries=".." --warnings all --fqbn esp8266:esp8266:generic exampleUsage/exampleUsage.ino
+
 arduino_lint:
   stage: validate
   image:
@@ -25,7 +26,7 @@ arduino_lint:
     - mkdir ~/arlint
     - PATH=~/arlint:$PATH
     - curl -fsSL https://raw.githubusercontent.com/arduino/arduino-lint/main/etc/install.sh | BINDIR=~/arlint sh
-      - arduino-lint --library-manager false
+    - arduino-lint --library-manager false
 
 syntax_check:
   stage: validate
