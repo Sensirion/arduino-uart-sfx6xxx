@@ -47,9 +47,16 @@ manager or `Add .ZIP Library`
 
 ## Sensor wiring
 
-### Connecting the Sensor
+### Custom sensor connection
 
-Use the following pin description to connect your SFC6XXX to your Arduino board:
+For custom setups please check out the detailed sensor pinout.
+
+<details>
+<summary>
+Detailed sensor pinout
+</summary>
+<p>
+The M8 connector of your SFC6XXX has the following pinout:
 
 <img src="images/product-pinout-sfc6xxx.png" width="300px">
 
@@ -60,32 +67,40 @@ Use the following pin description to connect your SFC6XXX to your Arduino board:
 | 3 | black | D- |  | 
 | 4 | blue | GND | Ground | 
 
-
-<details>
-<summary>
-MS5Stack RS485 Converter
-</summary>
-<p>
-Wiring of sensor pins to Adapter:
-
-| *Sensor Pin* | *Cable Color* | *Name* | *Adapter connection*  | *Comments* |
-|--------------|---------------|:-------------:|------------|------------|
-| 1 | brown | VDD | +24V | Connect to external power supply.
-| 2 | white | D+ | B | 
-| 3 | black | D- | A | 
-| 4 | blue | GND | Ground | Connect the Ground of the external power supply to the adapter ground as well
-
-Wiring of Adapter to Arduino:
-
-| *Adapter* | *Cable Color* | *Arduino Pin* | *Comments* |
-|--------------|---------------|:-------------:|------------|
-| TXD | white | RX | cross over
-| RXD | yellow | TX | cross over | 
-| 5V | red | +5V | Power supply for the adapter.
-| GND | black | GND | Connect the Ground of the external power supply to the adapter ground as well
-
 </p>
 </details>
+</br>
+
+### Connecting the Sensor over RS485 converter
+
+To connect the sensor to your Arduino board's serial interface you need a RS485 to RS232 converter. For example, you can use following material:
+
+- [RS485 to RS232 Converter U094 from M5Stack](https://www.distrelec.ch/en/isolated-rs485-transceiver-unit-m5stack-u094/p/30185750)
+- [M8 socket to Bare End Cable](https://www.distrelec.ch/en/actuator-sensor-cable-m8-socket-bare-end-conductors-5m-phoenix-contact-1681842/p/11033799) to connect the sensor to the converter
+- [Groove to pin header cable](https://www.distrelec.ch/en/grove-pin-male-jumper-to-grove-seeed-studio-110990210/p/30118352) to connect the RS485 converter to your Arduino board
+
+<img src="images/SFC6xxxRS485ConverterPinout.png" width="500px">
+
+Wire the sensor to the RS485 converter using the M8 socket to Bare End Cable:
+
+| *Sensor Pin* | *Cable Color* | *Name* | *Converter connection*  | *Comments* |
+|--------------|---------------|:-------------:|------------|------------|
+| 1 | brown | VDD | - | Connect to external power supply (+24V).
+| 2 | white | D+ | A | 
+| 3 | black | D- | B | 
+| 4 | blue | GND | Ground | Connect the Ground of the external power supply to the adapter ground as well
+
+Wire the RS485 converter to your Arduino board using the Groove to pin header cable:
+
+| *Converter* | *Cable Color* | *Arduino Pin* | *Comments* |
+|--------------|---------------|:-------------:|------------|
+| TXD | yellow | RX | cross over |
+| RXD | white | TX | cross over | 
+| 5V | red | 5V | Power supply for the RS485 converter |
+| GND | black | GND |  |
+
+
+
 
 ### Board-specific wiring
 
@@ -103,17 +118,15 @@ You will find pinout schematics for recommended board models below:
 <details><summary>Arduino Mega 2560 Rev3 Pinout</summary>
 <p>
 
-| *SFC6XXX* | *SFC6XXX Pin* | *Cable Color* | *Board Pin* |
-| :---: | --- | --- | --- |
-| VDD | 1 | brown | 5V |
-| D+ | 2 | white |  |
-| D- | 3 | black |  |
-| GND | 4 | blue | GND |
+| *Converter* | *Cable Color* | *Arduino Pin* | *Comments* |
+|--------------|---------------|:-------------:|------------|
+| TXD | yellow | D19 (RX1)  | cross over |
+| RXD | white | D18 (TX1) | cross over | 
+| 5V | red | 5V | Power supply for the RS485 converter |
+| GND | black | GND |  |
 
 
-
-
-> **Note:** Make sure to connect serial pins as cross-over (RX pin of sensor -> TX pin on Arduino; TX pin of sensor -> RX pin on Ardunio)
+> **Note:** Make sure to connect serial pins as cross-over (RXD pin of converter -> TX pin on Arduino; TXD pin of converter -> RX pin on Ardunio)
 
 <img src="images/Arduino-uart-Mega-2560-Rev3-pinout-5V.png" width="600px">
 </p>
@@ -122,21 +135,21 @@ You will find pinout schematics for recommended board models below:
 <details><summary>Espressif ESP32-DevKitC Pinout</summary>
 <p>
 
-| *SFC6XXX* | *SFC6XXX Pin* | *Cable Color* | *Board Pin* |
-| :---: | --- | --- | --- |
-| VDD | 1 | brown | 5V |
-| D+ | 2 | white |  |
-| D- | 3 | black |  |
-| GND | 4 | blue | GND |
+| *Converter* | *Cable Color* | *ESP Pin* | *Comments* |
+|--------------|---------------|:-------------:|------------|
+| TXD | yellow | GPIO16 (RXD 2) | cross over |
+| RXD | white | GPIO17 (TXD 2) | cross over | 
+| 5V | red | 5V | Power supply for the RS485 converter |
+| GND | black | GND |  |
 
 
 
-
-> **Note:** Make sure to connect serial pins as cross-over (RX pin of sensor -> TX pin on ESP; TX pin of sensor -> RX pin on ESP)
+> **Note:** Make sure to connect serial pins as cross-over (RXD pin of converter -> TX pin on ESP; TXD pin of converter -> RX pin on ESP)
 
 <img src="images/esp32-serial2-devkitc-pinout-5V.png" width="600px">
 </p>
 </details>
+
 
 ## Quick start example
 
