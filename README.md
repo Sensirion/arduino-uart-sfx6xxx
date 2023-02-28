@@ -11,12 +11,12 @@ Click [here](https://sensirion.com/sfc6000) to learn more about the Sensirion SF
 
 ## Supported sensor types
 
-- [SFC6XXX](https://sensirion.com/products/catalog/SFC6000/)
+- [SFC6000](https://sensirion.com/products/catalog/SFC6000/)
 - [SFC6000D-5SLM](https://sensirion.com/products/catalog/SFC6000D-5slm/)
 - [SFC6000D-50SLM](https://sensirion.com/products/catalog/SFC6000D-50slm/)
 - [SFC6000D-20SLM](https://sensirion.com/products/catalog/SFC6000D-20slm/)
 
-The following instructions and examples use a *SFC6xxx*.
+The following instructions and examples use a *SFC6000*.
 
 
 
