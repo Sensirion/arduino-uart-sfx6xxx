@@ -99,6 +99,12 @@ void loop() {
         Serial.print("Error trying to execute readAveragedMeasuredValue(): ");
         errorToString(error, errorMessage, sizeof errorMessage);
         Serial.println(errorMessage);
+        if (error == STATUS_CODE_SENSOR_MEASURE_LOOP_NOT_RUNNING_ERROR) {
+            Serial.println(
+                "Most likely the valve was closed due to overheating "
+                "protection.\nMake sure a flow is applied and restart the "
+                "script.");
+        }
         return;
     }
     Serial.print("averagedMeasuredValue: ");
