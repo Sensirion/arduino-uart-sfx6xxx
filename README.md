@@ -77,9 +77,8 @@ To connect the sensor to your Arduino board's serial interface you need a RS485 
 
 - [RS485 to RS232 Converter U094 from M5Stack](https://www.distrelec.ch/en/isolated-rs485-transceiver-unit-m5stack-u094/p/30185750)
 - [M8 socket to Bare End Cable](https://www.distrelec.ch/en/actuator-sensor-cable-m8-socket-bare-end-conductors-5m-phoenix-contact-1681842/p/11033799) to connect the sensor to the converter
-- [Groove to pin header cable](https://www.distrelec.ch/en/grove-pin-male-jumper-to-grove-seeed-studio-110990210/p/30118352) to connect the RS485 converter to your Arduino board
+- [Grove to pin header cable](https://www.distrelec.ch/en/grove-pin-male-jumper-to-grove-seeed-studio-110990210/p/30118352) to connect the RS485 converter to your Arduino board
 
-<img src="images/SFC6xxxRS485ConverterPinout.png" width="500px">
 
 Wire the sensor to the RS485 converter using the M8 socket to Bare End Cable:
 
@@ -90,7 +89,9 @@ Wire the sensor to the RS485 converter using the M8 socket to Bare End Cable:
 | 3 | black | D- | B | 
 | 4 | blue | GND | Ground | Connect the Ground of the external power supply to the adapter ground as well
 
-Wire the RS485 converter to your Arduino board using the Groove to pin header cable:
+<img src="images/SFC6xxxRS485ConverterPinout.png" width="500px">
+
+Wire the RS485 converter to your Arduino board using the Grove to pin header cable:
 
 | *Converter* | *Cable Color* | *Arduino Pin* | *Comments* |
 |--------------|---------------|:-------------:|------------|
