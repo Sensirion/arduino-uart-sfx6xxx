@@ -1,11 +1,11 @@
-# Sensirion UART SFC6XXX Arduino Library
+# Sensirion UART SFX6XXX Arduino Library
 
-This is the Sensirion SFC6XXX library for Arduino allowing you to 
-communicate with a sensor of the SFC6XXX family over UART using the SHDLC protocol.
+This is the Sensirion SFX6XXX library for Arduino allowing you to 
+communicate with a sensor of the SFX6XXX family over UART using the SHDLC protocol.
 
-<center><img src="images/product-image-sfc6xxx.png" width="300px"></center>
+<center><img src="images/product-image-sfx6xxx.png" width="300px"></center>
 
-Click [here](https://sensirion.com/sfc6000) to learn more about the Sensirion SFC6XXX sensor family.
+Click [here](https://sensirion.com/sfc6000) to learn more about the Sensirion SFX6XXX sensor family.
 
 
 
@@ -15,6 +15,10 @@ Click [here](https://sensirion.com/sfc6000) to learn more about the Sensirion SF
 - [SFC6000D-5SLM](https://sensirion.com/products/catalog/SFC6000D-5slm/)
 - [SFC6000D-50SLM](https://sensirion.com/products/catalog/SFC6000D-50slm/)
 - [SFC6000D-20SLM](https://sensirion.com/products/catalog/SFC6000D-20slm/)
+- [SFM6000](https://sensirion.com/products/catalog/SFM6000)
+- [SFM6000D-20SLM](https://sensirion.com/products/catalog/SFM6000D-20slm)
+- [SFM6000D-50SLM](https://sensirion.com/products/catalog/SFM6000D-50slm)
+- [SFM6000D-5SLM](https://sensirion.com/products/catalog/SFM6000D-5slm)
 
 The following instructions and examples use a *SFC6000*.
 
@@ -29,7 +33,7 @@ the Library Manager via
 
 `Sketch` ➔ `Include Library` ➔ `Manage Libraries...`
 
-Search for the `Sensririon UART SFC6XXX` library in the `Filter your search...` 
+Search for the `Sensririon UART SFX6XXX` library in the `Filter your search...` 
 field and install it by clicking the `install` button.
 
 If you cannot find it in the library manager, download the latest release as .zip file 
@@ -47,18 +51,11 @@ manager or `Add .ZIP Library`
 
 ## Sensor wiring
 
-### Custom sensor connection
+### Connecting the Sensor
 
-For custom setups please check out the detailed sensor pinout.
+Use the following pin description to connect your SFX6XXX to your Arduino board:
 
-<details>
-<summary>
-Detailed sensor pinout
-</summary>
-<p>
-The M8 connector of your SFC6XXX has the following pinout:
-
-<img src="images/product-pinout-sfc6xxx.png" width="300px">
+<img src="images/product-pinout-sfx6xxx.png" width="300px">
 
 | *Pin* | *Cable Color* | *Name* | *Description*  | *Comments* |
 |-------|---------------|:------:|----------------|------------|
@@ -67,46 +64,12 @@ The M8 connector of your SFC6XXX has the following pinout:
 | 3 | black | D- |  | 
 | 4 | blue | GND | Ground | 
 
-</p>
-</details>
-</br>
-
-### Connecting the Sensor over RS485 converter
-
-To connect the sensor to your Arduino board's serial interface you need a RS485 to RS232 converter. For example, you can use following material:
-
-- [RS485 to RS232 Converter U094 from M5Stack](https://www.distrelec.ch/en/isolated-rs485-transceiver-unit-m5stack-u094/p/30185750)
-- [M8 socket to Bare End Cable](https://www.distrelec.ch/en/actuator-sensor-cable-m8-socket-bare-end-conductors-5m-phoenix-contact-1681842/p/11033799) to connect the sensor to the converter
-- [Grove to pin header cable](https://www.distrelec.ch/en/grove-pin-male-jumper-to-grove-seeed-studio-110990210/p/30118352) to connect the RS485 converter to your Arduino board
-
-
-Wire the sensor to the RS485 converter using the M8 socket to Bare End Cable:
-
-| *Sensor Pin* | *Cable Color* | *Name* | *Converter connection*  | *Comments* |
-|--------------|---------------|:-------------:|------------|------------|
-| 1 | brown | VDD | - | Connect to external power supply (+24V).
-| 2 | white | D+ | A | 
-| 3 | black | D- | B | 
-| 4 | blue | GND | Ground | Connect the Ground of the external power supply to the adapter ground as well
-
-<img src="images/SFC6xxxRS485ConverterPinout.png" width="500px">
-
-Wire the RS485 converter to your Arduino board using the Grove to pin header cable:
-
-| *Converter* | *Cable Color* | *Arduino Pin* | *Comments* |
-|--------------|---------------|:-------------:|------------|
-| TXD | yellow | RX | cross over |
-| RXD | white | TX | cross over | 
-| 5V | red | 5V | Power supply for the RS485 converter |
-| GND | black | GND |  |
-
-
 
 
 ### Board-specific wiring
 
 We recommend using Arduino Boards or an ESP supporting **two or more hardware serial connections** 
-to run the example code. One serial port is needed to connect the SFC6XXX sensor and the other one 
+to run the example code. One serial port is needed to connect the SFX6XXX sensor and the other one 
 (over USB) for logging to the Serial Monitor of the Arduino IDE.
 
 Arduino Uno, Micro and Nano have only one hardware serial connection and are therefore not recommended to use. 
@@ -119,15 +82,17 @@ You will find pinout schematics for recommended board models below:
 <details><summary>Arduino Mega 2560 Rev3 Pinout</summary>
 <p>
 
-| *Converter* | *Cable Color* | *Arduino Pin* | *Comments* |
-|--------------|---------------|:-------------:|------------|
-| TXD | yellow | D19 (RX1)  | cross over |
-| RXD | white | D18 (TX1) | cross over | 
-| 5V | red | 5V | Power supply for the RS485 converter |
-| GND | black | GND |  |
+| *SFX6XXX* | *SFX6XXX Pin* | *Cable Color* | *Board Pin* |
+| :---: | --- | --- | --- |
+| VDD | 1 | brown | 5V |
+| D+ | 2 | white |  |
+| D- | 3 | black |  |
+| GND | 4 | blue | GND |
 
 
-> **Note:** Make sure to connect serial pins as cross-over (RXD pin of converter -> TX pin on Arduino; TXD pin of converter -> RX pin on Ardunio)
+
+
+> **Note:** Make sure to connect serial pins as cross-over (RX pin of sensor -> TX pin on Arduino; TX pin of sensor -> RX pin on Ardunio)
 
 <img src="images/Arduino-uart-Mega-2560-Rev3-pinout-5V.png" width="600px">
 </p>
@@ -136,31 +101,31 @@ You will find pinout schematics for recommended board models below:
 <details><summary>Espressif ESP32-DevKitC Pinout</summary>
 <p>
 
-| *Converter* | *Cable Color* | *ESP Pin* | *Comments* |
-|--------------|---------------|:-------------:|------------|
-| TXD | yellow | GPIO16 (RXD 2) | cross over |
-| RXD | white | GPIO17 (TXD 2) | cross over | 
-| 5V | red | 5V | Power supply for the RS485 converter |
-| GND | black | GND |  |
+| *SFX6XXX* | *SFX6XXX Pin* | *Cable Color* | *Board Pin* |
+| :---: | --- | --- | --- |
+| VDD | 1 | brown | 5V |
+| D+ | 2 | white |  |
+| D- | 3 | black |  |
+| GND | 4 | blue | GND |
 
 
 
-> **Note:** Make sure to connect serial pins as cross-over (RXD pin of converter -> TX pin on ESP; TXD pin of converter -> RX pin on ESP)
+
+> **Note:** Make sure to connect serial pins as cross-over (RX pin of sensor -> TX pin on ESP; TX pin of sensor -> RX pin on ESP)
 
 <img src="images/esp32-serial2-devkitc-pinout-5V.png" width="600px">
 </p>
 </details>
 
-
 ## Quick start example
 
 1. Install the libraries and dependencies according to [Installation of the library](#installation-of-the-library)
 
-2. Connect the SFC6XXX sensor as explained in [Sensor wiring](#sensor-wiring)
+2. Connect the SFX6XXX sensor as explained in [Sensor wiring](#sensor-wiring)
 
 3. Load the `exampleUsage` sample project within the Arduino IDE:
 
-   `File` ➔ `Examples` ➔ `Sensirion UART SFC6XXX` ➔ `exampleUsage`
+   `File` ➔ `Examples` ➔ `Sensirion UART SFX6XXX` ➔ `exampleUsage`
 
 4. Depending on your Arduino board you may need to adapt the code sample. 
 See the [board specific instruction](#board-specific-instructions) section for more information. 
@@ -179,7 +144,7 @@ See the [board specific instruction](#board-specific-instructions) section for m
 <p>
 
 #### Serial Interface
-The provided wiring instructed you to connect the SFC6XXX to **Serial Port 1**. 
+The provided wiring instructed you to connect the SFX6XXX to **Serial Port 1**. 
 Therefore, the following line needs to be used in the usage example code:
 
 `#define SENSOR_SERIAL_INTERFACE Serial1`
