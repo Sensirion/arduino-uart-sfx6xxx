@@ -6,7 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-SensirionUartSfc6xxx	KEYWORD1
+SensirionUartSfx6xxx	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)

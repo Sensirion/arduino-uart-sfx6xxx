@@ -1,12 +1,13 @@
-# Sensirion UART SFC6XXX Arduino Library
+# Sensirion UART SFX6XXX Arduino Library
 
-This is the Sensirion SFC6XXX library for Arduino allowing you to 
-communicate with a sensor of the SFC6XXX family over UART using the SHDLC protocol.
+This is the Sensirion SFX6XXX library for Arduino allowing you to 
+communicate with a sensor of the SFX6XXX family over UART using the SHDLC protocol.
 
-<center><img src="images/product-image-sfc6xxx.png" width="300px"></center>
+<center><img src="images/product-image-sfx6xxx.png" width="300px"></center>
 
-Click [here](https://sensirion.com/sfc6000) to learn more about the Sensirion SFC6XXX sensor family.
+Click [here](https://sensirion.com/sfc6000) to learn more about the Sensirion SFC6XXX mass flow controller family.
 
+Click [here](https://sensirion.com/sfm6000) to learn more about the Sensirion SFM6XXX gas flow sensor family.
 
 
 ## Supported sensor types
@@ -15,11 +16,12 @@ Click [here](https://sensirion.com/sfc6000) to learn more about the Sensirion SF
 - [SFC6000D-5SLM](https://sensirion.com/products/catalog/SFC6000D-5slm/)
 - [SFC6000D-50SLM](https://sensirion.com/products/catalog/SFC6000D-50slm/)
 - [SFC6000D-20SLM](https://sensirion.com/products/catalog/SFC6000D-20slm/)
+- [SFM6000](https://sensirion.com/products/catalog/SFM6000)
+- [SFM6000D-20SLM](https://sensirion.com/products/catalog/SFM6000D-20slm)
+- [SFM6000D-50SLM](https://sensirion.com/products/catalog/SFM6000D-50slm)
+- [SFM6000D-5SLM](https://sensirion.com/products/catalog/SFM6000D-5slm)
 
 The following instructions and examples use a *SFC6000*.
-
-
-
 
 ## Installation of the library
 
@@ -29,7 +31,7 @@ the Library Manager via
 
 `Sketch` ➔ `Include Library` ➔ `Manage Libraries...`
 
-Search for the `Sensririon UART SFC6XXX` library in the `Filter your search...` 
+Search for the `Sensririon UART SFX6XXX` library in the `Filter your search...` 
 field and install it by clicking the `install` button.
 
 If you cannot find it in the library manager, download the latest release as .zip file 
@@ -56,9 +58,9 @@ For custom setups please check out the detailed sensor pinout.
 Detailed sensor pinout
 </summary>
 <p>
-The M8 connector of your SFC6XXX has the following pinout:
+The M8 connector of your SFX6XXX has the following pinout:
 
-<img src="images/product-pinout-sfc6xxx.png" width="300px">
+<img src="images/product-pinout-sfx6xxx.png" width="300px">
 
 | *Pin* | *Cable Color* | *Name* | *Description*  | *Comments* |
 |-------|---------------|:------:|----------------|------------|
@@ -106,7 +108,7 @@ Wire the RS485 converter to your Arduino board using the Grove to pin header cab
 ### Board-specific wiring
 
 We recommend using Arduino Boards or an ESP supporting **two or more hardware serial connections** 
-to run the example code. One serial port is needed to connect the SFC6XXX sensor and the other one 
+to run the example code. One serial port is needed to connect the SFX6XXX sensor and the other one 
 (over USB) for logging to the Serial Monitor of the Arduino IDE.
 
 Arduino Uno, Micro and Nano have only one hardware serial connection and are therefore not recommended to use. 
@@ -156,11 +158,11 @@ You will find pinout schematics for recommended board models below:
 
 1. Install the libraries and dependencies according to [Installation of the library](#installation-of-the-library)
 
-2. Connect the SFC6XXX sensor as explained in [Sensor wiring](#sensor-wiring)
+2. Connect the SFX6XXX sensor as explained in [Sensor wiring](#sensor-wiring)
 
 3. Load the `exampleUsage` sample project within the Arduino IDE:
 
-   `File` ➔ `Examples` ➔ `Sensirion UART SFC6XXX` ➔ `exampleUsage`
+   `File` ➔ `Examples` ➔ `Sensirion UART SFX6XXX` ➔ `exampleUsage`
 
 4. Depending on your Arduino board you may need to adapt the code sample. 
 See the [board specific instruction](#board-specific-instructions) section for more information. 
@@ -179,7 +181,7 @@ See the [board specific instruction](#board-specific-instructions) section for m
 <p>
 
 #### Serial Interface
-The provided wiring instructed you to connect the SFC6XXX to **Serial Port 1**. 
+The provided wiring instructed you to connect the SFX6XXX to **Serial Port 1**. 
 Therefore, the following line needs to be used in the usage example code:
 
 `#define SENSOR_SERIAL_INTERFACE Serial1`
