@@ -200,7 +200,8 @@ Esspressif itself.
 #### Serial Interface
 The provided wiring instructed you to connect the sensor to **Serial Port 2**.
 
-Since ESP boards require `HardwareSerial` implementation, you need to include the following lines in the usage example code:
+Since ESP boards require `HardwareSerial` implementation, you need to replace the define for the SENSOR_SERIAL_INTERFACE
+with the following lines in the usage example code:
 
 ```
 #include <HardwareSerial.h>
