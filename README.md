@@ -75,9 +75,9 @@ The M8 connector of your SFX6XXX has the following pinout:
 
 ### Connecting the Sensor over RS485 converter
 
-To connect the sensor to your Arduino board's serial interface you need a RS485 to RS232 converter. For example, you can use following material:
+To connect the sensor to your Arduino board's serial interface you need a RS485 to TTL converter. For example, you can use the following material:
 
-- [RS485 to RS232 Converter U094 from M5Stack](https://www.distrelec.ch/en/isolated-rs485-transceiver-unit-m5stack-u094/p/30185750)
+- [RS485 to TTL Converter U094 from M5Stack](https://shop.m5stack.com/products/isolated-rs485-unit)
 - [M8 socket to Bare End Cable](https://www.distrelec.ch/en/actuator-sensor-cable-m8-socket-bare-end-conductors-5m-phoenix-contact-1681842/p/11033799) to connect the sensor to the converter
 - [Grove to pin header cable](https://www.distrelec.ch/en/grove-pin-male-jumper-to-grove-seeed-studio-110990210/p/30118352) to connect the RS485 converter to your Arduino board
 
