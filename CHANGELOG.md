@@ -1,17 +1,15 @@
-# Changelog
-All notable changes to this project will be documented in this file.
+# CHANGELOG
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] 
 
-## [Unreleased]
+## [1.0.0] - 2023-3-14
 
-## [1.1.0] - 2024-06-03
+### Added
 
-* Update library name to be consistent with other Sensirion library names.
+- Initial release
 
-## [1.0.0] - 2023-03-14
-
-Initial release
-
+[Unreleased]: https://github.com/Sensirion/arduino-uart-sfx6xxx/compare/1.0.0...HEAD
+[1.0.0]: https://github.com/Sensirion/arduino-uart-sfx6xxx/releases/tag/1.0.0
