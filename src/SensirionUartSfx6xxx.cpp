@@ -55,7 +55,7 @@ int16_t SensirionUartSfx6xxx::setSetpoint(float setpoint) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x0, SFX6XXX_SHDLC_ADDR, 5);
+    localError = txFrame.begin(0x0, _address, 5);
     localError |= txFrame.addUInt8(1);
     localError |= txFrame.addFloat(setpoint);
     localError |= txFrame.finish();
@@ -75,7 +75,7 @@ int16_t SensirionUartSfx6xxx::getSetpoint(float& setpoint) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x0, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x0, _address, 1);
     localError |= txFrame.addUInt8(1);
     localError |= txFrame.finish();
     if (localError) {
@@ -95,7 +95,7 @@ int16_t SensirionUartSfx6xxx::readMeasuredValue(float& measuredValue) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x8, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x8, _address, 1);
     localError |= txFrame.addUInt8(1);
     localError |= txFrame.finish();
     if (localError) {
@@ -117,7 +117,7 @@ SensirionUartSfx6xxx::readAveragedMeasuredValue(uint8_t measurements,
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x8, SFX6XXX_SHDLC_ADDR, 2);
+    localError = txFrame.begin(0x8, _address, 2);
     localError |= txFrame.addUInt8(17);
     localError |= txFrame.addUInt8(measurements);
     localError |= txFrame.finish();
@@ -140,7 +140,7 @@ SensirionUartSfx6xxx::setSetpointAndReadMeasuredValue(float setpoint,
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x3, SFX6XXX_SHDLC_ADDR, 5);
+    localError = txFrame.begin(0x3, _address, 5);
     localError |= txFrame.addUInt8(1);
     localError |= txFrame.addFloat(setpoint);
     localError |= txFrame.finish();
@@ -161,7 +161,7 @@ int16_t SensirionUartSfx6xxx::setUserControllerGain(float gain) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x22, SFX6XXX_SHDLC_ADDR, 5);
+    localError = txFrame.begin(0x22, _address, 5);
     localError |= txFrame.addUInt8(0);
     localError |= txFrame.addFloat(gain);
     localError |= txFrame.finish();
@@ -181,7 +181,7 @@ int16_t SensirionUartSfx6xxx::getUserControllerGain(float& gain) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x22, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x22, _address, 1);
     localError |= txFrame.addUInt8(0);
     localError |= txFrame.finish();
     if (localError) {
@@ -201,7 +201,7 @@ int16_t SensirionUartSfx6xxx::setUserInitStep(float initStep) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x22, SFX6XXX_SHDLC_ADDR, 5);
+    localError = txFrame.begin(0x22, _address, 5);
     localError |= txFrame.addUInt8(3);
     localError |= txFrame.addFloat(initStep);
     localError |= txFrame.finish();
@@ -221,7 +221,7 @@ int16_t SensirionUartSfx6xxx::getUserInitStep(float& initStep) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x22, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x22, _address, 1);
     localError |= txFrame.addUInt8(3);
     localError |= txFrame.finish();
     if (localError) {
@@ -241,7 +241,7 @@ int16_t SensirionUartSfx6xxx::measureRawFlow(uint16_t& flow) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 16);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 16);
-    localError = txFrame.begin(0x30, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x30, _address, 1);
     localError |= txFrame.addUInt8(0);
     localError |= txFrame.finish();
     if (localError) {
@@ -262,7 +262,7 @@ int16_t SensirionUartSfx6xxx::measureRawThermalConductivityWithClosedValve(
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 16);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 16);
-    localError = txFrame.begin(0x30, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x30, _address, 1);
     localError |= txFrame.addUInt8(2);
     localError |= txFrame.finish();
     if (localError) {
@@ -282,7 +282,7 @@ int16_t SensirionUartSfx6xxx::measureTemperature(float& temperature) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x30, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x30, _address, 1);
     localError |= txFrame.addUInt8(16);
     localError |= txFrame.finish();
     if (localError) {
@@ -303,7 +303,7 @@ SensirionUartSfx6xxx::getNumberOfCalibrations(uint32_t& numberOfCalibrations) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x40, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x40, _address, 1);
     localError |= txFrame.addUInt8(0);
     localError |= txFrame.finish();
     if (localError) {
@@ -324,7 +324,7 @@ int16_t SensirionUartSfx6xxx::getCalibrationValidity(uint32_t index,
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x40, SFX6XXX_SHDLC_ADDR, 5);
+    localError = txFrame.begin(0x40, _address, 5);
     localError |= txFrame.addUInt8(16);
     localError |= txFrame.addUInt32(index);
     localError |= txFrame.finish();
@@ -346,7 +346,7 @@ int16_t SensirionUartSfx6xxx::getCalibrationGasId(uint32_t index,
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x40, SFX6XXX_SHDLC_ADDR, 5);
+    localError = txFrame.begin(0x40, _address, 5);
     localError |= txFrame.addUInt8(18);
     localError |= txFrame.addUInt32(index);
     localError |= txFrame.finish();
@@ -370,7 +370,7 @@ int16_t SensirionUartSfx6xxx::getCalibrationGasUnit(uint32_t index,
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x40, SFX6XXX_SHDLC_ADDR, 5);
+    localError = txFrame.begin(0x40, _address, 5);
     localError |= txFrame.addUInt8(19);
     localError |= txFrame.addUInt32(index);
     localError |= txFrame.finish();
@@ -394,7 +394,7 @@ int16_t SensirionUartSfx6xxx::getCalibrationFullscale(uint32_t index,
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x40, SFX6XXX_SHDLC_ADDR, 5);
+    localError = txFrame.begin(0x40, _address, 5);
     localError |= txFrame.addUInt8(20);
     localError |= txFrame.addUInt32(index);
     localError |= txFrame.finish();
@@ -415,7 +415,7 @@ int16_t SensirionUartSfx6xxx::getCurrentGasId(uint32_t& gasId) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x44, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x44, _address, 1);
     localError |= txFrame.addUInt8(18);
     localError |= txFrame.finish();
     if (localError) {
@@ -436,7 +436,7 @@ int16_t SensirionUartSfx6xxx::getCurrentGasUnit(int8_t& prefix, uint8_t& unit,
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 18);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 18);
-    localError = txFrame.begin(0x44, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x44, _address, 1);
     localError |= txFrame.addUInt8(19);
     localError |= txFrame.finish();
     if (localError) {
@@ -458,7 +458,7 @@ int16_t SensirionUartSfx6xxx::getCurrentFullscale(float& fullscale) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x44, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x44, _address, 1);
     localError |= txFrame.addUInt8(20);
     localError |= txFrame.finish();
     if (localError) {
@@ -478,7 +478,7 @@ int16_t SensirionUartSfx6xxx::setCalibration(uint32_t calibrationNumber) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 18);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 18);
-    localError = txFrame.begin(0x45, SFX6XXX_SHDLC_ADDR, 4);
+    localError = txFrame.begin(0x45, _address, 4);
     localError |= txFrame.addUInt32(calibrationNumber);
     localError |= txFrame.finish();
     if (localError) {
@@ -497,7 +497,7 @@ int16_t SensirionUartSfx6xxx::getCalibration(uint32_t& calibrationNumber) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x45, SFX6XXX_SHDLC_ADDR, 0);
+    localError = txFrame.begin(0x45, _address, 0);
     localError |= txFrame.finish();
     if (localError) {
         return localError;
@@ -517,7 +517,7 @@ SensirionUartSfx6xxx::setCalibrationVolatile(uint32_t calibrationNumber) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 18);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 18);
-    localError = txFrame.begin(0x46, SFX6XXX_SHDLC_ADDR, 4);
+    localError = txFrame.begin(0x46, _address, 4);
     localError |= txFrame.addUInt32(calibrationNumber);
     localError |= txFrame.finish();
     if (localError) {
@@ -536,7 +536,7 @@ int16_t SensirionUartSfx6xxx::setSlaveAddress(uint8_t slaveAddress) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 12);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 12);
-    localError = txFrame.begin(0x90, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0x90, _address, 1);
     localError |= txFrame.addUInt8(slaveAddress);
     localError |= txFrame.finish();
     if (localError) {
@@ -555,7 +555,7 @@ int16_t SensirionUartSfx6xxx::getSlaveAddress(uint8_t& slaveAddress) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 14);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 14);
-    localError = txFrame.begin(0x90, SFX6XXX_SHDLC_ADDR, 0);
+    localError = txFrame.begin(0x90, _address, 0);
     localError |= txFrame.finish();
     if (localError) {
         return localError;
@@ -574,7 +574,7 @@ int16_t SensirionUartSfx6xxx::setBaudrate(uint32_t baudrate) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 18);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 18);
-    localError = txFrame.begin(0x91, SFX6XXX_SHDLC_ADDR, 4);
+    localError = txFrame.begin(0x91, _address, 4);
     localError |= txFrame.addUInt32(baudrate);
     localError |= txFrame.finish();
     if (localError) {
@@ -593,7 +593,7 @@ int16_t SensirionUartSfx6xxx::getBaudrate(uint32_t& baudrate) {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 20);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 20);
-    localError = txFrame.begin(0x91, SFX6XXX_SHDLC_ADDR, 0);
+    localError = txFrame.begin(0x91, _address, 0);
     localError |= txFrame.finish();
     if (localError) {
         return localError;
@@ -613,7 +613,7 @@ int16_t SensirionUartSfx6xxx::getProductType(int8_t productType[],
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 140);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 140);
-    localError = txFrame.begin(0xd0, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0xd0, _address, 1);
     localError |= txFrame.addUInt8(0);
     localError |= txFrame.finish();
     if (localError) {
@@ -634,7 +634,7 @@ int16_t SensirionUartSfx6xxx::getProductName(int8_t productName[],
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 140);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 140);
-    localError = txFrame.begin(0xd0, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0xd0, _address, 1);
     localError |= txFrame.addUInt8(1);
     localError |= txFrame.finish();
     if (localError) {
@@ -655,7 +655,7 @@ int16_t SensirionUartSfx6xxx::getArticleCode(int8_t articleCode[],
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 140);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 140);
-    localError = txFrame.begin(0xd0, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0xd0, _address, 1);
     localError |= txFrame.addUInt8(2);
     localError |= txFrame.finish();
     if (localError) {
@@ -676,7 +676,7 @@ int16_t SensirionUartSfx6xxx::getSerialNumber(int8_t serialNumber[],
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 140);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 140);
-    localError = txFrame.begin(0xd0, SFX6XXX_SHDLC_ADDR, 1);
+    localError = txFrame.begin(0xd0, _address, 1);
     localError |= txFrame.addUInt8(3);
     localError |= txFrame.finish();
     if (localError) {
@@ -700,7 +700,7 @@ SensirionUartSfx6xxx::getVersion(uint8_t& firmwareMajor, uint8_t& firmwareMinor,
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 26);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 26);
-    localError = txFrame.begin(0xd1, SFX6XXX_SHDLC_ADDR, 0);
+    localError = txFrame.begin(0xd1, _address, 0);
     localError |= txFrame.finish();
     if (localError) {
         return localError;
@@ -725,7 +725,7 @@ int16_t SensirionUartSfx6xxx::deviceReset() {
     uint8_t* buffer_ptr = communication_buffer;
     SensirionShdlcTxFrame txFrame(buffer_ptr, 12);
     SensirionShdlcRxFrame rxFrame(buffer_ptr, 12);
-    localError = txFrame.begin(0xd3, SFX6XXX_SHDLC_ADDR, 0);
+    localError = txFrame.begin(0xd3, _address, 0);
     localError |= txFrame.finish();
     if (localError) {
         return localError;
