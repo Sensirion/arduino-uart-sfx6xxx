@@ -739,6 +739,7 @@ int16_t SensirionUartSfx6xxx::deviceReset() {
     return NO_ERROR;
 }
 
-void SensirionUartSfx6xxx::begin(Stream& serial) {
+void SensirionUartSfx6xxx::begin(Stream& serial, uint8_t address) {
     _serial = &serial;
+    _address = address;
 }

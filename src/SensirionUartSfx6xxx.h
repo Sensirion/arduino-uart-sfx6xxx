@@ -104,8 +104,9 @@ class SensirionUartSfx6xxx {
      * @brief Initializes the Sfx6xxx class.
      *
      * @param serial Arduino stream object to be used for communiction.
+     * @param slave address of the sensor on the RS485 bus.
      */
-    void begin(Stream& serial);
+    void begin(Stream& serial, uint8_t address = SFX6XXX_SHDLC_ADDR);
 
     /**
      * @brief Switch device off (close the valve by setting setpoint to 0)
@@ -574,6 +575,7 @@ class SensirionUartSfx6xxx {
 
   private:
     Stream* _serial = nullptr;
+    uint8_t _address;
 };
 
 #endif  // SENSIRIONUARTSFX6XXX_H
