@@ -575,7 +575,7 @@ class SensirionUartSfx6xxx {
 
   private:
     Stream* _serial = nullptr;
-    uint8_t _address;
+    uint8_t _address = SFX6XXX_SHDLC_ADDR;
 };
 
 #endif  // SENSIRIONUARTSFX6XXX_H
